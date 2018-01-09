@@ -22,7 +22,7 @@ public enum GribFileStreamError: Error {
     case endOfFile
     case unknown
 }
-
+// MARK: - GribFileStream
 public final class GribFileStream: InputStream {
     /**
      The amount of bytes currently read from the GRIB file.
@@ -40,16 +40,22 @@ public final class GribFileStream: InputStream {
      */
     private var bits = Array<UInt8>()
 }
-// MARK: Read raw bytes from GRIB file.
+// MARK: - Reading Bytes from GRIB File
 public extension GribFileStream {
     /**
      Read a byte from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
      
      - returns:
      A UInt8 (byte).
      
      - throws:
      An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
      
      This is for reading a raw byte from the GRIB file. For any specific data type, use the function that reads and returns that data type.
      */
@@ -74,6 +80,9 @@ public extension GribFileStream {
     /**
      Read a defined amount of bytes from the GRIB file.
      
+     - Author:
+     Tristan Beaton
+     
      - returns:
      An array of bytes to the amount specified, or until the end of file was reached.
      
@@ -82,6 +91,9 @@ public extension GribFileStream {
      
      - parameters:
         - length: The maximum amount of bytes to be read from the GRIB file.
+     
+     - Version:
+     0.1
      
      This is for reading raw bytes from the GRIB file. For any specific data type, use the function that reads and returns that data type.
      */
@@ -104,13 +116,19 @@ public extension GribFileStream {
         return buffer
     }
 }
-// MARK: Read bits from GRIB file.
+// MARK: - Reading Bits from GRIB File
 extension GribFileStream {
     /**
      Reads a byte from the GRIB file and slices it into bits to store in the bit buffer.
      
+     - Author:
+     Tristan Beaton
+     
      - throws:
      An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
      */
     private func loadBitBuffer() throws {
         // Read byte from the GRIB file.
@@ -128,11 +146,17 @@ extension GribFileStream {
     /**
      Read a bit from the GRIB file.
      
+     - Author:
+     Tristan Beaton
+     
      - returns:
      A bit.
      
      - throws:
      An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
      */
     func readBit() throws -> Bit {
         // Check the bit buffer for a bit.
@@ -159,6 +183,9 @@ extension GribFileStream {
     /**
      Read a defined amount of bits from the GRIB file.
      
+     - Author:
+     Tristan Beaton
+     
      - returns:
      An array of bits to the amount specified, or until the end of file was reached.
      
@@ -167,6 +194,9 @@ extension GribFileStream {
      
      - parameters:
         - length: The maximum amount of bits to be read from the GRIB file.
+     
+     - Version:
+     0.1
      */
     func readBits(_ length:Int) throws -> Array<Bit> {
         // Check if we need to read more bytes into the bit buffer.
@@ -190,5 +220,99 @@ extension GribFileStream {
             // Return bits.
             return bits.map { Bit($0) }
         }
+    }
+}
+// MARK: - Reading Unsigned Integers from GRIB File
+extension GribFileStream {
+    /**
+     Reads a UInt8 from the GRIB file.
+    
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     A UInt8.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readUI8() throws -> UInt8 {
+        // Check if there is any bits in the bit buffer.
+        if bits.count == 0 { return try readByte() }
+        // Load bits into bit buffer.
+        while bits.count >= 8 { try loadBitBuffer() }
+        // Create byte from the bit buffer.
+        let byte = bits[0] << 7 | bits[1] << 6 | bits[2] << 5 | bits[3] << 4 | bits[4] << 3 | bits[5] << 2 | bits[6] << 1 | bits[7]
+        // Remove bits from bit buffer.
+        bits.removeSubrange(0 ..< 8)
+        // Return byte.
+        return byte
+    }
+    /**
+     Reads a UInt16 from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     A UInt16.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readUI16() throws -> UInt16 {
+        // Read bytes from GRIB file.
+        let bytes = [UInt16(try readUI8()), UInt16(try readUI8())]
+        // Join bytes.
+        return bytes[0] << 8 | bytes[1]
+    }
+    /**
+     Reads a UInt32 from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     A UInt32.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readUI32() throws -> UInt32 {
+        // Read bytes from GRIB file.
+        let bytes = [UInt32(try readUI8()), UInt32(try readUI8()), UInt32(try readUI8()), UInt32(try readUI8())]
+        // Join bytes.
+        return bytes[0] << 24 | bytes[1] << 16 | bytes[2] << 8 | bytes[3]
+    }
+    /**
+     Reads a UInt64 from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     A UInt64.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readUI64() throws -> UInt64 {
+        // Read bytes from GRIB file.
+        let bytes = [UInt64(try readUI8()), UInt64(try readUI8()), UInt64(try readUI8()), UInt64(try readUI8()),
+                     UInt64(try readUI8()), UInt64(try readUI8()), UInt64(try readUI8()), UInt64(try readUI8())]
+        // Join bytes.
+        return bytes[0] << 56 | bytes[1] << 48 | bytes[2] << 40 | bytes[3] << 32 | bytes[4] << 24 | bytes[5] << 16 | bytes[6] << 8 | bytes[7]
     }
 }
