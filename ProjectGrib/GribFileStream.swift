@@ -11,6 +11,11 @@ import Foundation
 public enum Bit {
     case zero
     case one
+    
+    fileprivate init(_ raw:UInt8) {
+        if raw == 1 { self = .one; return }
+        self = .zero
+    }
 }
 
 public enum GribFileStreamError: Error {
@@ -27,18 +32,15 @@ public final class GribFileStream: InputStream {
      
      This is so when reading the GRIB file it is possible to track how much of the file has been read.
      */
-    var totalBytesRead = 0
+    private(set) var totalBytesRead = 0
     /**
      Stores an array of bits that are left over after splicing a byte.
      
-     - returns:
-     An array of Bits, which are even ones or zeros.
-     
      Since the Input Stream can only read bytes at a time, the ability to read bits is a bit more complicated. So whenever the number of bits needed to be read is not divisible by 8, these left over bits get stored and become the start of the next batch of bits read.
      */
-    var bits = Array<Bit>()
+    private var bits = Array<UInt8>()
 }
-
+// MARK: Read raw bytes from GRIB file.
 public extension GribFileStream {
     /**
      Read a byte from the GRIB file.
@@ -64,6 +66,8 @@ public extension GribFileStream {
             case -1: throw self.streamError ?? GribFileStreamError.unknown
             default: break
         }
+        // Update total bytes read count
+        totalBytesRead += 1
         // Return the bytes if there was no error.
         return buffer
     }
@@ -94,7 +98,97 @@ public extension GribFileStream {
             case -1: throw GribFileStreamError.unknown
             default: break
         }
+        // Update total bytes read count
+        totalBytesRead += buffer.count
         // Return the bytes if there was no error.
         return buffer
+    }
+}
+// MARK: Read bits from GRIB file.
+extension GribFileStream {
+    /**
+     Reads a byte from the GRIB file and slices it into bits to store in the bit buffer.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     */
+    private func loadBitBuffer() throws {
+        // Read byte from the GRIB file.
+        let byte = try readByte()
+        // Divide the byte into bits.
+        bits.append(byte >> 7)
+        bits.append(byte >> 6 & 0x1)
+        bits.append(byte >> 5 & 0x1)
+        bits.append(byte >> 4 & 0x1)
+        bits.append(byte >> 3 & 0x1)
+        bits.append(byte >> 2 & 0x1)
+        bits.append(byte >> 1 & 0x1)
+        bits.append(byte & 0x1)
+    }
+    /**
+     Read a bit from the GRIB file.
+     
+     - returns:
+     A bit.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     */
+    func readBit() throws -> Bit {
+        // Check the bit buffer for a bit.
+        if let bit = bits.first {
+            // Since there is a bit, we will use that and also remove it from the buffer.
+            bits.removeFirst()
+            // Return bit.
+            return Bit(bit)
+        }
+        // Otherwise we need to read it from the GRIB file.
+        let byte = try readByte()
+        // Divide the byte into bits.
+        let bit = byte >> 7
+        bits.append(byte >> 6 & 0x1)
+        bits.append(byte >> 5 & 0x1)
+        bits.append(byte >> 4 & 0x1)
+        bits.append(byte >> 3 & 0x1)
+        bits.append(byte >> 2 & 0x1)
+        bits.append(byte >> 1 & 0x1)
+        bits.append(byte & 0x1)
+        // Return bit
+        return Bit(bit)
+    }
+    /**
+     Read a defined amount of bits from the GRIB file.
+     
+     - returns:
+     An array of bits to the amount specified, or until the end of file was reached.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - parameters:
+        - length: The maximum amount of bits to be read from the GRIB file.
+     */
+    func readBits(_ length:Int) throws -> Array<Bit> {
+        // Check if we need to read more bytes into the bit buffer.
+        while bits.count < length {
+            // If we cannot read anymore bytes, just return what we have.
+            do { try loadBitBuffer() }
+            // If we haven't reached the end of the file, some other error must have occured, so pass it on and don't continue.
+            catch { switch error { case GribFileStreamError.endOfFile: break; default: throw error }}
+        }
+        // Determine whether we have the correct amount of bits.
+        if bits.count >= length {
+            // Store those bits.
+            let rawBits = bits[0 ..< length]
+            // Remove the bits from the buffer
+            bits.removeSubrange(0 ..< length)
+            // Return bits.
+            return rawBits.map { Bit($0) }
+        } else {
+            // Check that we have bits.
+            if bits.count == 0 { throw GribFileStreamError.endOfFile }
+            // Return bits.
+            return bits.map { Bit($0) }
+        }
     }
 }
