@@ -10,6 +10,7 @@
 		FD6BF4FE200556CC00C8C0DC /* ProjectGrib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6BF4F4200556CC00C8C0DC /* ProjectGrib.framework */; };
 		FD6BF503200556CC00C8C0DC /* ProjectGribTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6BF502200556CC00C8C0DC /* ProjectGribTests.swift */; };
 		FD6BF505200556CC00C8C0DC /* ProjectGrib.h in Headers */ = {isa = PBXBuildFile; fileRef = FD6BF4F7200556CC00C8C0DC /* ProjectGrib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD6BF54F2005595900C8C0DC /* GribFileStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6BF54E2005595900C8C0DC /* GribFileStream.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		FD6BF4FD200556CC00C8C0DC /* ProjectGribTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectGribTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6BF502200556CC00C8C0DC /* ProjectGribTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectGribTests.swift; sourceTree = "<group>"; };
 		FD6BF504200556CC00C8C0DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD6BF54E2005595900C8C0DC /* GribFileStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GribFileStream.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				FD6BF4F7200556CC00C8C0DC /* ProjectGrib.h */,
 				FD6BF4F8200556CC00C8C0DC /* Info.plist */,
+				FD6BF54E2005595900C8C0DC /* GribFileStream.swift */,
 			);
 			path = ProjectGrib;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				TargetAttributes = {
 					FD6BF4F3200556CC00C8C0DC = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					FD6BF4FC200556CC00C8C0DC = {
@@ -196,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD6BF54F2005595900C8C0DC /* GribFileStream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +339,7 @@
 		FD6BF509200556CC00C8C0DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -347,6 +353,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nz.tristanbeaton.ProjectGrib;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -355,6 +362,7 @@
 		FD6BF50A200556CC00C8C0DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -376,6 +384,7 @@
 		FD6BF50C200556CC00C8C0DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q628MNEAGU;
 				INFOPLIST_FILE = ProjectGribTests/Info.plist;
@@ -390,6 +399,7 @@
 		FD6BF50D200556CC00C8C0DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q628MNEAGU;
 				INFOPLIST_FILE = ProjectGribTests/Info.plist;
