@@ -8,7 +8,37 @@
 
 /* Begin PBXBuildFile section */
 		FD12DC3A2005AD4200321E45 /* Bit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC392005AD4100321E45 /* Bit.swift */; };
-		FD12DC3C2005AD5400321E45 /* GribFileStreamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC3B2005AD5400321E45 /* GribFileStreamError.swift */; };
+		FD12DC3C2005AD5400321E45 /* GribError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC3B2005AD5400321E45 /* GribError.swift */; };
+		FD12DC3E2005B2DD00321E45 /* GribFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC3D2005B2DD00321E45 /* GribFile.swift */; };
+		FD12DC502005D5CF00321E45 /* IndicatorSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC482005D5CE00321E45 /* IndicatorSection.swift */; };
+		FD12DC512005D5CF00321E45 /* IdentificationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC492005D5CE00321E45 /* IdentificationSection.swift */; };
+		FD12DC522005D5CF00321E45 /* DataSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC4A2005D5CE00321E45 /* DataSection.swift */; };
+		FD12DC532005D5CF00321E45 /* LocalUseSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC4B2005D5CE00321E45 /* LocalUseSection.swift */; };
+		FD12DC542005D5CF00321E45 /* ProductDefinitionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC4C2005D5CE00321E45 /* ProductDefinitionSection.swift */; };
+		FD12DC552005D5CF00321E45 /* BitmapSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC4D2005D5CE00321E45 /* BitmapSection.swift */; };
+		FD12DC562005D5CF00321E45 /* GridDefinitionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC4E2005D5CF00321E45 /* GridDefinitionSection.swift */; };
+		FD12DC572005D5CF00321E45 /* DataRepresentationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC4F2005D5CF00321E45 /* DataRepresentationSection.swift */; };
+		FD12DC6E2005D6C600321E45 /* Section5CodeTable1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC6D2005D6C600321E45 /* Section5CodeTable1.swift */; };
+		FD12DC712005D6E100321E45 /* Section6CodeTable0.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC702005D6E100321E45 /* Section6CodeTable0.swift */; };
+		FD12DC772005D6EC00321E45 /* Section4CodeTable1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC722005D6EC00321E45 /* Section4CodeTable1.swift */; };
+		FD12DC782005D6EC00321E45 /* Section4CodeTable2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC732005D6EC00321E45 /* Section4CodeTable2.swift */; };
+		FD12DC792005D6EC00321E45 /* Section4CodeTable3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC742005D6EC00321E45 /* Section4CodeTable3.swift */; };
+		FD12DC7A2005D6EC00321E45 /* Section4CodeTable4.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC752005D6EC00321E45 /* Section4CodeTable4.swift */; };
+		FD12DC7B2005D6EC00321E45 /* Section4CodeTable5.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC762005D6EC00321E45 /* Section4CodeTable5.swift */; };
+		FD12DC7F2005D6F300321E45 /* Section3CodeTable0.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC7C2005D6F300321E45 /* Section3CodeTable0.swift */; };
+		FD12DC802005D6F300321E45 /* Section3CodeTable2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC7D2005D6F300321E45 /* Section3CodeTable2.swift */; };
+		FD12DC812005D6F300321E45 /* Section3CodeTable11.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC7E2005D6F300321E45 /* Section3CodeTable11.swift */; };
+		FD12DC862005D6FB00321E45 /* Section1CodeTable3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC822005D6FA00321E45 /* Section1CodeTable3.swift */; };
+		FD12DC872005D6FB00321E45 /* Section1CodeTable0.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC832005D6FA00321E45 /* Section1CodeTable0.swift */; };
+		FD12DC882005D6FB00321E45 /* Section1CodeTable4.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC842005D6FB00321E45 /* Section1CodeTable4.swift */; };
+		FD12DC892005D6FB00321E45 /* Section1CodeTable2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC852005D6FB00321E45 /* Section1CodeTable2.swift */; };
+		FD12DC8B2005D70200321E45 /* Section0CodeTable0.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC8A2005D70200321E45 /* Section0CodeTable0.swift */; };
+		FD12DC902005D7A100321E45 /* Section3FlagTable4.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC8E2005D7A100321E45 /* Section3FlagTable4.swift */; };
+		FD12DC912005D7A100321E45 /* Section3FlagTable3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC8F2005D7A100321E45 /* Section3FlagTable3.swift */; };
+		FD12DC962005D7C900321E45 /* Section4Template0.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC932005D7C900321E45 /* Section4Template0.swift */; };
+		FD12DC972005D7C900321E45 /* Section3Template0.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC942005D7C900321E45 /* Section3Template0.swift */; };
+		FD12DC982005D7C900321E45 /* Section5Template0.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC952005D7C900321E45 /* Section5Template0.swift */; };
+		FD12DC9D2005D89D00321E45 /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC9C2005D89D00321E45 /* Template.swift */; };
 		FD6BF4FE200556CC00C8C0DC /* ProjectGrib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6BF4F4200556CC00C8C0DC /* ProjectGrib.framework */; };
 		FD6BF503200556CC00C8C0DC /* ProjectGribTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6BF502200556CC00C8C0DC /* ProjectGribTests.swift */; };
 		FD6BF505200556CC00C8C0DC /* ProjectGrib.h in Headers */ = {isa = PBXBuildFile; fileRef = FD6BF4F7200556CC00C8C0DC /* ProjectGrib.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,7 +57,37 @@
 
 /* Begin PBXFileReference section */
 		FD12DC392005AD4100321E45 /* Bit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bit.swift; sourceTree = "<group>"; };
-		FD12DC3B2005AD5400321E45 /* GribFileStreamError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GribFileStreamError.swift; sourceTree = "<group>"; };
+		FD12DC3B2005AD5400321E45 /* GribError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GribError.swift; sourceTree = "<group>"; };
+		FD12DC3D2005B2DD00321E45 /* GribFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GribFile.swift; sourceTree = "<group>"; };
+		FD12DC482005D5CE00321E45 /* IndicatorSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorSection.swift; sourceTree = "<group>"; };
+		FD12DC492005D5CE00321E45 /* IdentificationSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentificationSection.swift; sourceTree = "<group>"; };
+		FD12DC4A2005D5CE00321E45 /* DataSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSection.swift; sourceTree = "<group>"; };
+		FD12DC4B2005D5CE00321E45 /* LocalUseSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalUseSection.swift; sourceTree = "<group>"; };
+		FD12DC4C2005D5CE00321E45 /* ProductDefinitionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDefinitionSection.swift; sourceTree = "<group>"; };
+		FD12DC4D2005D5CE00321E45 /* BitmapSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitmapSection.swift; sourceTree = "<group>"; };
+		FD12DC4E2005D5CF00321E45 /* GridDefinitionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridDefinitionSection.swift; sourceTree = "<group>"; };
+		FD12DC4F2005D5CF00321E45 /* DataRepresentationSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRepresentationSection.swift; sourceTree = "<group>"; };
+		FD12DC6D2005D6C600321E45 /* Section5CodeTable1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section5CodeTable1.swift; sourceTree = "<group>"; };
+		FD12DC702005D6E100321E45 /* Section6CodeTable0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section6CodeTable0.swift; sourceTree = "<group>"; };
+		FD12DC722005D6EC00321E45 /* Section4CodeTable1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section4CodeTable1.swift; sourceTree = "<group>"; };
+		FD12DC732005D6EC00321E45 /* Section4CodeTable2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section4CodeTable2.swift; sourceTree = "<group>"; };
+		FD12DC742005D6EC00321E45 /* Section4CodeTable3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section4CodeTable3.swift; sourceTree = "<group>"; };
+		FD12DC752005D6EC00321E45 /* Section4CodeTable4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section4CodeTable4.swift; sourceTree = "<group>"; };
+		FD12DC762005D6EC00321E45 /* Section4CodeTable5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section4CodeTable5.swift; sourceTree = "<group>"; };
+		FD12DC7C2005D6F300321E45 /* Section3CodeTable0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section3CodeTable0.swift; sourceTree = "<group>"; };
+		FD12DC7D2005D6F300321E45 /* Section3CodeTable2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section3CodeTable2.swift; sourceTree = "<group>"; };
+		FD12DC7E2005D6F300321E45 /* Section3CodeTable11.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section3CodeTable11.swift; sourceTree = "<group>"; };
+		FD12DC822005D6FA00321E45 /* Section1CodeTable3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section1CodeTable3.swift; sourceTree = "<group>"; };
+		FD12DC832005D6FA00321E45 /* Section1CodeTable0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section1CodeTable0.swift; sourceTree = "<group>"; };
+		FD12DC842005D6FB00321E45 /* Section1CodeTable4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section1CodeTable4.swift; sourceTree = "<group>"; };
+		FD12DC852005D6FB00321E45 /* Section1CodeTable2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section1CodeTable2.swift; sourceTree = "<group>"; };
+		FD12DC8A2005D70200321E45 /* Section0CodeTable0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section0CodeTable0.swift; sourceTree = "<group>"; };
+		FD12DC8E2005D7A100321E45 /* Section3FlagTable4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section3FlagTable4.swift; sourceTree = "<group>"; };
+		FD12DC8F2005D7A100321E45 /* Section3FlagTable3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section3FlagTable3.swift; sourceTree = "<group>"; };
+		FD12DC932005D7C900321E45 /* Section4Template0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section4Template0.swift; sourceTree = "<group>"; };
+		FD12DC942005D7C900321E45 /* Section3Template0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section3Template0.swift; sourceTree = "<group>"; };
+		FD12DC952005D7C900321E45 /* Section5Template0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section5Template0.swift; sourceTree = "<group>"; };
+		FD12DC9C2005D89D00321E45 /* Template.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 		FD6BF4F4200556CC00C8C0DC /* ProjectGrib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProjectGrib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6BF4F7200556CC00C8C0DC /* ProjectGrib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectGrib.h; sourceTree = "<group>"; };
 		FD6BF4F8200556CC00C8C0DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +116,154 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD12DC432005D31500321E45 /* CodeTables */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC672005D67C00321E45 /* Section 0 */,
+				FD12DC682005D68300321E45 /* Section 1 */,
+				FD12DC6A2005D68F00321E45 /* Section 3 */,
+				FD12DC6B2005D69300321E45 /* Section 4 */,
+				FD12DC6C2005D69900321E45 /* Section 5 */,
+				FD12DC6F2005D6C900321E45 /* Section 6 */,
+			);
+			path = CodeTables;
+			sourceTree = "<group>";
+		};
+		FD12DC462005D35900321E45 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC3D2005B2DD00321E45 /* GribFile.swift */,
+				FD6BF54E2005595900C8C0DC /* GribFileStream.swift */,
+				FD12DC3B2005AD5400321E45 /* GribError.swift */,
+				FD12DC392005AD4100321E45 /* Bit.swift */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
+		FD12DC472005D58600321E45 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC482005D5CE00321E45 /* IndicatorSection.swift */,
+				FD12DC492005D5CE00321E45 /* IdentificationSection.swift */,
+				FD12DC4B2005D5CE00321E45 /* LocalUseSection.swift */,
+				FD12DC4E2005D5CF00321E45 /* GridDefinitionSection.swift */,
+				FD12DC4C2005D5CE00321E45 /* ProductDefinitionSection.swift */,
+				FD12DC4F2005D5CF00321E45 /* DataRepresentationSection.swift */,
+				FD12DC4D2005D5CE00321E45 /* BitmapSection.swift */,
+				FD12DC4A2005D5CE00321E45 /* DataSection.swift */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
+		FD12DC672005D67C00321E45 /* Section 0 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC8A2005D70200321E45 /* Section0CodeTable0.swift */,
+			);
+			path = "Section 0";
+			sourceTree = "<group>";
+		};
+		FD12DC682005D68300321E45 /* Section 1 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC832005D6FA00321E45 /* Section1CodeTable0.swift */,
+				FD12DC852005D6FB00321E45 /* Section1CodeTable2.swift */,
+				FD12DC822005D6FA00321E45 /* Section1CodeTable3.swift */,
+				FD12DC842005D6FB00321E45 /* Section1CodeTable4.swift */,
+			);
+			path = "Section 1";
+			sourceTree = "<group>";
+		};
+		FD12DC6A2005D68F00321E45 /* Section 3 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC7C2005D6F300321E45 /* Section3CodeTable0.swift */,
+				FD12DC7D2005D6F300321E45 /* Section3CodeTable2.swift */,
+				FD12DC7E2005D6F300321E45 /* Section3CodeTable11.swift */,
+			);
+			path = "Section 3";
+			sourceTree = "<group>";
+		};
+		FD12DC6B2005D69300321E45 /* Section 4 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC722005D6EC00321E45 /* Section4CodeTable1.swift */,
+				FD12DC732005D6EC00321E45 /* Section4CodeTable2.swift */,
+				FD12DC742005D6EC00321E45 /* Section4CodeTable3.swift */,
+				FD12DC752005D6EC00321E45 /* Section4CodeTable4.swift */,
+				FD12DC762005D6EC00321E45 /* Section4CodeTable5.swift */,
+			);
+			path = "Section 4";
+			sourceTree = "<group>";
+		};
+		FD12DC6C2005D69900321E45 /* Section 5 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC6D2005D6C600321E45 /* Section5CodeTable1.swift */,
+			);
+			path = "Section 5";
+			sourceTree = "<group>";
+		};
+		FD12DC6F2005D6C900321E45 /* Section 6 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC702005D6E100321E45 /* Section6CodeTable0.swift */,
+			);
+			path = "Section 6";
+			sourceTree = "<group>";
+		};
+		FD12DC8C2005D78600321E45 /* Flag Tables */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC8D2005D79600321E45 /* Section 3 */,
+			);
+			path = "Flag Tables";
+			sourceTree = "<group>";
+		};
+		FD12DC8D2005D79600321E45 /* Section 3 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC8F2005D7A100321E45 /* Section3FlagTable3.swift */,
+				FD12DC8E2005D7A100321E45 /* Section3FlagTable4.swift */,
+			);
+			path = "Section 3";
+			sourceTree = "<group>";
+		};
+		FD12DC922005D7BC00321E45 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC9C2005D89D00321E45 /* Template.swift */,
+				FD12DC992005D7CC00321E45 /* Section 3 */,
+				FD12DC9A2005D7D100321E45 /* Section 4 */,
+				FD12DC9B2005D7D700321E45 /* Section 5 */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		FD12DC992005D7CC00321E45 /* Section 3 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC942005D7C900321E45 /* Section3Template0.swift */,
+			);
+			path = "Section 3";
+			sourceTree = "<group>";
+		};
+		FD12DC9A2005D7D100321E45 /* Section 4 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC932005D7C900321E45 /* Section4Template0.swift */,
+			);
+			path = "Section 4";
+			sourceTree = "<group>";
+		};
+		FD12DC9B2005D7D700321E45 /* Section 5 */ = {
+			isa = PBXGroup;
+			children = (
+				FD12DC952005D7C900321E45 /* Section5Template0.swift */,
+			);
+			path = "Section 5";
+			sourceTree = "<group>";
+		};
 		FD6BF4EA200556CB00C8C0DC = {
 			isa = PBXGroup;
 			children = (
@@ -79,9 +287,11 @@
 			children = (
 				FD6BF4F7200556CC00C8C0DC /* ProjectGrib.h */,
 				FD6BF4F8200556CC00C8C0DC /* Info.plist */,
-				FD6BF54E2005595900C8C0DC /* GribFileStream.swift */,
-				FD12DC3B2005AD5400321E45 /* GribFileStreamError.swift */,
-				FD12DC392005AD4100321E45 /* Bit.swift */,
+				FD12DC462005D35900321E45 /* api */,
+				FD12DC472005D58600321E45 /* Sections */,
+				FD12DC922005D7BC00321E45 /* Templates */,
+				FD12DC432005D31500321E45 /* CodeTables */,
+				FD12DC8C2005D78600321E45 /* Flag Tables */,
 			);
 			path = ProjectGrib;
 			sourceTree = "<group>";
@@ -206,9 +416,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD12DC7B2005D6EC00321E45 /* Section4CodeTable5.swift in Sources */,
+				FD12DC802005D6F300321E45 /* Section3CodeTable2.swift in Sources */,
 				FD6BF54F2005595900C8C0DC /* GribFileStream.swift in Sources */,
-				FD12DC3C2005AD5400321E45 /* GribFileStreamError.swift in Sources */,
+				FD12DC882005D6FB00321E45 /* Section1CodeTable4.swift in Sources */,
+				FD12DC7F2005D6F300321E45 /* Section3CodeTable0.swift in Sources */,
+				FD12DC782005D6EC00321E45 /* Section4CodeTable2.swift in Sources */,
+				FD12DC502005D5CF00321E45 /* IndicatorSection.swift in Sources */,
+				FD12DC562005D5CF00321E45 /* GridDefinitionSection.swift in Sources */,
+				FD12DC982005D7C900321E45 /* Section5Template0.swift in Sources */,
+				FD12DC912005D7A100321E45 /* Section3FlagTable3.swift in Sources */,
+				FD12DC552005D5CF00321E45 /* BitmapSection.swift in Sources */,
+				FD12DC902005D7A100321E45 /* Section3FlagTable4.swift in Sources */,
+				FD12DC972005D7C900321E45 /* Section3Template0.swift in Sources */,
+				FD12DC542005D5CF00321E45 /* ProductDefinitionSection.swift in Sources */,
+				FD12DC3E2005B2DD00321E45 /* GribFile.swift in Sources */,
+				FD12DC532005D5CF00321E45 /* LocalUseSection.swift in Sources */,
+				FD12DC812005D6F300321E45 /* Section3CodeTable11.swift in Sources */,
+				FD12DC872005D6FB00321E45 /* Section1CodeTable0.swift in Sources */,
+				FD12DC9D2005D89D00321E45 /* Template.swift in Sources */,
+				FD12DC522005D5CF00321E45 /* DataSection.swift in Sources */,
+				FD12DC792005D6EC00321E45 /* Section4CodeTable3.swift in Sources */,
+				FD12DC6E2005D6C600321E45 /* Section5CodeTable1.swift in Sources */,
+				FD12DC3C2005AD5400321E45 /* GribError.swift in Sources */,
+				FD12DC892005D6FB00321E45 /* Section1CodeTable2.swift in Sources */,
+				FD12DC962005D7C900321E45 /* Section4Template0.swift in Sources */,
+				FD12DC772005D6EC00321E45 /* Section4CodeTable1.swift in Sources */,
+				FD12DC7A2005D6EC00321E45 /* Section4CodeTable4.swift in Sources */,
+				FD12DC572005D5CF00321E45 /* DataRepresentationSection.swift in Sources */,
+				FD12DC512005D5CF00321E45 /* IdentificationSection.swift in Sources */,
+				FD12DC8B2005D70200321E45 /* Section0CodeTable0.swift in Sources */,
 				FD12DC3A2005AD4200321E45 /* Bit.swift in Sources */,
+				FD12DC712005D6E100321E45 /* Section6CodeTable0.swift in Sources */,
+				FD12DC862005D6FB00321E45 /* Section1CodeTable3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

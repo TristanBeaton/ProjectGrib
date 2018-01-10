@@ -8,8 +8,13 @@
 
 import Foundation
 
-public enum GribFileStreamError: Error {
+enum GribFileStreamError: Error {
+    case cannotReadFile
     case endOfFile
+    case fileNotFound
+    case invalidFile
+    case invalidSection(UInt8)
     case invalidString
     case unknown
+    case unsupportedTemplate(Int, UInt16)
 }

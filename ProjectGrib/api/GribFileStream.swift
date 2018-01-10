@@ -9,7 +9,11 @@
 import Foundation
 
 // MARK: - GribFileStream
-public final class GribFileStream: InputStream {
+final class GribFileStream {
+    /**
+     An input stream to read data from the GRIB file.
+     */
+    private(set) var stream: InputStream
     /**
      The amount of bytes currently read from the GRIB file.
      
@@ -25,9 +29,31 @@ public final class GribFileStream: InputStream {
      Since the Input Stream can only read bytes at a time, the ability to read bits is a bit more complicated. So whenever the number of bits needed to be read is not divisible by 8, these left over bits get stored and become the start of the next batch of bits read.
      */
     private var bits = Array<UInt8>()
+    /**
+     Returns a boolean if there is data still avalible to be from the GRIB file.
+     
+     - returns:
+     A Bool.
+     */
+    var hasBytesAvailable: Bool { return stream.hasBytesAvailable }
+    
+    // Initialise
+    init(at path:String) throws {
+        // Try to create a stream.
+        if let stream = InputStream(fileAtPath: path) {
+            // Open stream so we can read it.
+            stream.open()
+            // Save the stream to the stream reference.
+            self.stream = stream
+            // Return since we have finished initialising.
+            return
+        }
+        // Throw an error if we get to this point
+        throw GribFileStreamError.cannotReadFile
+    }
 }
 // MARK: - Reading Bytes from GRIB File
-public extension GribFileStream {
+extension GribFileStream {
     /**
      Read a byte from the GRIB file.
      
@@ -47,15 +73,15 @@ public extension GribFileStream {
      */
     func readByte() throws -> UInt8 {
         // Check that there is data avalible to be read from the GRIB file.
-        if hasBytesAvailable { throw GribFileStreamError.endOfFile }
+        if !hasBytesAvailable { throw GribFileStreamError.endOfFile }
         // Create a buffer to store the byte read from the GRIB file.
         var buffer = UInt8()
         // Read the GRIB file and save the response so we can check for any errors.
-        let response = read(&buffer, maxLength: MemoryLayout<UInt8>.size)
+        let response = stream.read(&buffer, maxLength: MemoryLayout<UInt8>.size)
         // Determine any errors from the response.
         switch response {
             case 0: throw GribFileStreamError.endOfFile
-            case -1: throw self.streamError ?? GribFileStreamError.unknown
+            case -1: throw stream.streamError ?? GribFileStreamError.unknown
             default: break
         }
         // Update total bytes read count
@@ -85,11 +111,11 @@ public extension GribFileStream {
      */
     func readBytes(_ length:Int) throws -> Array<UInt8> {
         // Check that there is data avalible to be read from the GRIB file.
-        if hasBytesAvailable { throw GribFileStreamError.endOfFile }
+        if !hasBytesAvailable { throw GribFileStreamError.endOfFile }
         // Create a buffer to store the bytes read from the GRIB file.
         var buffer = Array<UInt8>()
         // Read the GRIB file and save the response so we can check for any errors.
-        let response = read(&buffer, maxLength: MemoryLayout<UInt8>.size * length)
+        let response = stream.read(&buffer, maxLength: MemoryLayout<UInt8>.size * length)
         // Determine any errors from the response.
         switch response {
             case 0: throw GribFileStreamError.endOfFile
@@ -103,7 +129,7 @@ public extension GribFileStream {
     }
 }
 // MARK: - Reading Bits from GRIB File
-public extension GribFileStream {
+extension GribFileStream {
     /**
      Reads a byte from the GRIB file and slices it into bits to store in the bit buffer.
      
@@ -207,12 +233,57 @@ public extension GribFileStream {
             return bits.map { Bit($0) }
         }
     }
+    /**
+     Read a defined amount of bits from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     An UInt of bits to the amount specified, or until the end of file was reached.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - parameters:
+     - length: The maximum amount of bits to be read from the GRIB file.
+     
+     - Version:
+     0.1
+     */
+    func readUInt(_ length:Int) throws -> UInt {
+        // Create a variable to store bits.
+        var value = UInt()
+        // Read bytes from GRIB file.
+        let bits = try readBits(length)
+        // If the bits amount is more than 8, then we'll use loop unrolling to improve performance.
+        if length >= 8 {
+            for i in 0 ..< Int(floor(Double(length) / 8)) {
+                value = value << 1 | (bits[(8 * i) + 0] == .zero ? 0 : 1)
+                value = value << 1 | (bits[(8 * i) + 1] == .zero ? 0 : 1)
+                value = value << 1 | (bits[(8 * i) + 2] == .zero ? 0 : 1)
+                value = value << 1 | (bits[(8 * i) + 3] == .zero ? 0 : 1)
+                value = value << 1 | (bits[(8 * i) + 4] == .zero ? 0 : 1)
+                value = value << 1 | (bits[(8 * i) + 5] == .zero ? 0 : 1)
+                value = value << 1 | (bits[(8 * i) + 6] == .zero ? 0 : 1)
+                value = value << 1 | (bits[(8 * i) + 7] == .zero ? 0 : 1)
+            }
+        }
+        // Check if there is any bits left from the loop unrolling.
+        if length % 8 != 0 {
+            // Any amount less than 8 or left over from the loop unrolling, we'll just do individually.
+            for i in 0 ..< length % 8 {
+                value = value << 1 | (bits[(8 * Int(floor(Double(length) / 8))) + i] == .zero ? 0 : 1)
+            }
+        }
+        return value
+    }
 }
 // MARK: - Reading Unsigned Integers from GRIB File
-public extension GribFileStream {
+extension GribFileStream {
     /**
      Reads a UInt8 from the GRIB file.
-    
+     
      - Author:
      Tristan Beaton
      
@@ -236,6 +307,44 @@ public extension GribFileStream {
         bits.removeSubrange(0 ..< 8)
         // Return byte.
         return byte
+    }
+    /**
+     Reads a specified amount of UInt8 from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     An array of UInt8.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readUI8(_ length:Int) throws -> Array<UInt8> {
+        // Read bytes from GRIB file.
+        var bytes = Array<UInt8>()
+        // If the bytes amount is more than 8, then we'll use loop unrolling to improve performance.
+        if length >= 8 {
+            for _ in 0 ..< Int(floor(Double(length) / 8)) {
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+            }
+        }
+        // Check if there is any bytes left from the loop unrolling.
+        if length % 8 != 0 {
+            // Any amount less than 8 or left over from the loop unrolling, we'll just do individually.
+            for _ in 0 ..< length % 8 { bytes.append(try readUI8()) }
+        }
+        return bytes
     }
     /**
      Reads a UInt16 from the GRIB file.
@@ -303,7 +412,7 @@ public extension GribFileStream {
     }
 }
 // MARK: - Reading Signed Integers from GRIB File
-public extension GribFileStream {
+extension GribFileStream {
     /**
      Reads a Int8 from the GRIB file.
      
@@ -381,8 +490,20 @@ public extension GribFileStream {
         return Int64(bitPattern: try readUI64())
     }
 }
+// MARK: - Reading Floating Points from GRIB File
+extension GribFileStream {
+    // MARK: - Floating Points
+    func readFloat() throws -> Float32 {
+        // Create a buffer to store Float.
+        var f:Float32 = 0.0
+        // Convert bytes to float.
+        memcpy(&f, try self.readUI8(4).reversed(), 4)
+        // Return Float
+        return f
+    }
+}
 // MARK: - Reading Text from GRIB File
-public extension GribFileStream {
+extension GribFileStream {
     /**
      Reads a String from the GRIB file.
      
@@ -400,31 +521,13 @@ public extension GribFileStream {
      */
     func readText(_ length:Int, encoding:String.Encoding = .utf8) throws -> String? {
         // Read bytes from GRIB file.
-        var bytes = Array<UInt8>()
-        // If the skip amount is more than 8, then we'll use loop unrolling to improve performance.
-        if length >= 8 {
-            for _ in 0 ..< Int(floor(Double(length) / 8)) {
-                bytes.append(try readUI8())
-                bytes.append(try readUI8())
-                bytes.append(try readUI8())
-                bytes.append(try readUI8())
-                bytes.append(try readUI8())
-                bytes.append(try readUI8())
-                bytes.append(try readUI8())
-                bytes.append(try readUI8())
-            }
-        }
-        // Check if there is any skips left from the loop unrolling.
-        if length % 8 != 0 {
-            // Any amount less than 8 or left over from the loop unrolling, we'll just do individually.
-            for _ in 0 ..< length % 8 { bytes.append(try readUI8()) }
-        }
+        let bytes = try readUI8(length)
         // Convert to a string.
         return String(bytes: bytes, encoding: encoding)
     }
 }
 // MARK: - Reading Booleans from GRIB File
-public extension GribFileStream {
+extension GribFileStream {
     /**
      Reads a Boolean from the GRIB file.
      
@@ -446,7 +549,7 @@ public extension GribFileStream {
     }
 }
 // MARK: - Scanning a GRIB File.
-public extension GribFileStream {
+extension GribFileStream {
     /**
      Skips ahead a specified amount of bytes.
      

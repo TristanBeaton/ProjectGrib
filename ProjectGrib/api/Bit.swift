@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Bit {
+enum Bit {
     case zero
     case one
     
