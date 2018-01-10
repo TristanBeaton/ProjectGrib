@@ -8,21 +8,6 @@
 
 import Foundation
 
-public enum Bit {
-    case zero
-    case one
-    
-    fileprivate init(_ raw:UInt8) {
-        if raw == 0 { self = .zero; return }
-        self = .one
-    }
-}
-
-public enum GribFileStreamError: Error {
-    case endOfFile
-    case invalidString
-    case unknown
-}
 // MARK: - GribFileStream
 public final class GribFileStream: InputStream {
     /**

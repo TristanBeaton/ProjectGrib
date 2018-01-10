@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD12DC3A2005AD4200321E45 /* Bit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC392005AD4100321E45 /* Bit.swift */; };
+		FD12DC3C2005AD5400321E45 /* GribFileStreamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12DC3B2005AD5400321E45 /* GribFileStreamError.swift */; };
 		FD6BF4FE200556CC00C8C0DC /* ProjectGrib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6BF4F4200556CC00C8C0DC /* ProjectGrib.framework */; };
 		FD6BF503200556CC00C8C0DC /* ProjectGribTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6BF502200556CC00C8C0DC /* ProjectGribTests.swift */; };
 		FD6BF505200556CC00C8C0DC /* ProjectGrib.h in Headers */ = {isa = PBXBuildFile; fileRef = FD6BF4F7200556CC00C8C0DC /* ProjectGrib.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,6 +26,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD12DC392005AD4100321E45 /* Bit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bit.swift; sourceTree = "<group>"; };
+		FD12DC3B2005AD5400321E45 /* GribFileStreamError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GribFileStreamError.swift; sourceTree = "<group>"; };
 		FD6BF4F4200556CC00C8C0DC /* ProjectGrib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProjectGrib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6BF4F7200556CC00C8C0DC /* ProjectGrib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectGrib.h; sourceTree = "<group>"; };
 		FD6BF4F8200556CC00C8C0DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 				FD6BF4F7200556CC00C8C0DC /* ProjectGrib.h */,
 				FD6BF4F8200556CC00C8C0DC /* Info.plist */,
 				FD6BF54E2005595900C8C0DC /* GribFileStream.swift */,
+				FD12DC3B2005AD5400321E45 /* GribFileStreamError.swift */,
+				FD12DC392005AD4100321E45 /* Bit.swift */,
 			);
 			path = ProjectGrib;
 			sourceTree = "<group>";
@@ -201,6 +207,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD6BF54F2005595900C8C0DC /* GribFileStream.swift in Sources */,
+				FD12DC3C2005AD5400321E45 /* GribFileStreamError.swift in Sources */,
+				FD12DC3A2005AD4200321E45 /* Bit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
