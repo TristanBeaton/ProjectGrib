@@ -13,13 +13,14 @@ public enum Bit {
     case one
     
     fileprivate init(_ raw:UInt8) {
-        if raw == 1 { self = .one; return }
-        self = .zero
+        if raw == 0 { self = .zero; return }
+        self = .one
     }
 }
 
 public enum GribFileStreamError: Error {
     case endOfFile
+    case invalidString
     case unknown
 }
 // MARK: - GribFileStream
@@ -393,5 +394,103 @@ public extension GribFileStream {
     func readInt64() throws -> Int64 {
         // Read a byte and cast it to Int64
         return Int64(bitPattern: try readUI64())
+    }
+}
+// MARK: - Reading Text from GRIB File
+public extension GribFileStream {
+    /**
+     Reads a String from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     An optional String. This is because the encoding can fail.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readText(_ length:Int, encoding:String.Encoding = .utf8) throws -> String? {
+        // Read bytes from GRIB file.
+        var bytes = Array<UInt8>()
+        // If the skip amount is more than 8, then we'll use loop unrolling to improve performance.
+        if length >= 8 {
+            for _ in 0 ..< Int(floor(Double(length) / 8)) {
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+                bytes.append(try readUI8())
+            }
+        }
+        // Check if there is any skips left from the loop unrolling.
+        if length % 8 != 0 {
+            // Any amount less than 8 or left over from the loop unrolling, we'll just do individually.
+            for _ in 0 ..< length % 8 { bytes.append(try readUI8()) }
+        }
+        // Convert to a string.
+        return String(bytes: bytes, encoding: encoding)
+    }
+}
+// MARK: - Reading Booleans from GRIB File
+public extension GribFileStream {
+    /**
+     Reads a Boolean from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     A Bool.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readBool() throws -> Bool {
+        // Read byte from GRIB file.
+        return try readUI8() > 0
+    }
+}
+// MARK: - Scanning a GRIB File.
+public extension GribFileStream {
+    /**
+     Skips ahead a specified amount of bytes.
+     
+     - Author:
+     Tristan Beaton
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func skip(_ length:Int = 1) throws {
+        // If the skip amount is more than 8, then we'll use loop unrolling to improve performance.
+        if length >= 8 {
+            for _ in 0 ..< Int(floor(Double(length) / 8)) {
+                let _ = try readUI8()
+                let _ = try readUI8()
+                let _ = try readUI8()
+                let _ = try readUI8()
+                let _ = try readUI8()
+                let _ = try readUI8()
+                let _ = try readUI8()
+                let _ = try readUI8()
+            }
+        }
+        // Check if there is any skips left from the loop unrolling.
+        if length % 8 == 0 { return }
+        // Any amount less than 8 or left over from the loop unrolling, we'll just do individually.
+        for _ in 0 ..< length % 8 { let _ = try readUI8() }
     }
 }
