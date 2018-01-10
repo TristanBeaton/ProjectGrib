@@ -117,7 +117,7 @@ public extension GribFileStream {
     }
 }
 // MARK: - Reading Bits from GRIB File
-extension GribFileStream {
+public extension GribFileStream {
     /**
      Reads a byte from the GRIB file and slices it into bits to store in the bit buffer.
      
@@ -223,7 +223,7 @@ extension GribFileStream {
     }
 }
 // MARK: - Reading Unsigned Integers from GRIB File
-extension GribFileStream {
+public extension GribFileStream {
     /**
      Reads a UInt8 from the GRIB file.
     
@@ -314,5 +314,84 @@ extension GribFileStream {
                      UInt64(try readUI8()), UInt64(try readUI8()), UInt64(try readUI8()), UInt64(try readUI8())]
         // Join bytes.
         return bytes[0] << 56 | bytes[1] << 48 | bytes[2] << 40 | bytes[3] << 32 | bytes[4] << 24 | bytes[5] << 16 | bytes[6] << 8 | bytes[7]
+    }
+}
+// MARK: - Reading Signed Integers from GRIB File
+public extension GribFileStream {
+    /**
+     Reads a Int8 from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     A Int8.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readInt8() throws -> Int8 {
+        // Read a byte and cast it to Int8
+        return Int8(bitPattern: try readUI8())
+    }
+    /**
+     Reads a Int16 from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     A Int16.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readInt16() throws -> Int16 {
+        // Read a byte and cast it to Int16
+        return Int16(bitPattern: try readUI16())
+    }
+    /**
+     Reads a Int32 from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     A Int32.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readInt32() throws -> Int32 {
+        // Read a byte and cast it to Int32
+        return Int32(bitPattern: try readUI32())
+    }
+    /**
+     Reads a Int64 from the GRIB file.
+     
+     - Author:
+     Tristan Beaton
+     
+     - returns:
+     A Int64.
+     
+     - throws:
+     An error of type 'GribFileStreamError'.
+     
+     - Version:
+     0.1
+     */
+    func readInt64() throws -> Int64 {
+        // Read a byte and cast it to Int64
+        return Int64(bitPattern: try readUI64())
     }
 }
